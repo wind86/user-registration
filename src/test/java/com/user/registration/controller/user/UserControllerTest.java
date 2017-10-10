@@ -100,17 +100,25 @@ public class UserControllerTest {
 	@Test
 	public void testSavingBlankUser() throws Exception {
 		List<FieldErrorDto> fieldErrors = testInvalidUserSaving(new UserDto());
-		assertEquals(4, fieldErrors.size());
+		assertEquals(5, fieldErrors.size());
 	}
 
 	@Test
-	public void testSavingUserWithInvalidUserName() throws Exception {
+	public void testSavingUserWithInvalidUserNameLength() throws Exception {
 		UserDto userDto = createDefaultUser();
 		userDto.setName("test");
 
-		testInvalidUserFieldSaving(userDto, "name", "user.name.length");
+		testInvalidUserFieldSaving(userDto, "name", "user.name");
 	}
 
+	@Test
+	public void testSavingUserWithInvalidUserNameCharacters() throws Exception {
+		UserDto userDto = createDefaultUser();
+		userDto.setName("te-st");
+
+		testInvalidUserFieldSaving(userDto, "name", "user.name");
+	}
+	
 	@Test
 	public void testSavingUserWithInvalidEmail() throws Exception {
 		UserDto userDto = createDefaultUser();

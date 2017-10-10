@@ -3,9 +3,9 @@ package com.user.registration.dto.user;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 
 import com.user.registration.validation.Password;
+import com.user.registration.validation.UserName;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class UserDto {
 	Long id;
 	
 	@NotNull(message = "null.user.name")
-	@Length(min = 5, message="user.name.length")
+	@UserName(message="user.name")
 	String name;
 	
 	@NotNull(message = "null.user.email")
