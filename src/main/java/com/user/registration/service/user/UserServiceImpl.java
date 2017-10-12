@@ -57,14 +57,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private static UserEntity toEntity(UserDto user) {
-		UserEntity entity = new UserEntity();
-		copyProperties(user, entity);
-		return entity;
+		return fillProperties(user, new UserEntity());
 	}
 
 	private static UserDto toDto(UserEntity user) {
-		UserDto dto = new UserDto();
-		copyProperties(user, dto);
-		return dto;
+		return fillProperties(user, new UserDto());
+	}
+	
+	private static <S,T> T fillProperties(S source, T target) {
+		copyProperties(source, target);
+		return target;
 	}
 }
